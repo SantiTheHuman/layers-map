@@ -1,0 +1,61 @@
+import React, { useRef, useEffect, useState } from "react";
+import mapboxgl from "mapbox-gl";
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import MapboxWorker from "worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker";
+import openLayer from "./helpers/openLayer";
+import createMarker from "./helpers/createMarker";
+import "./Map.css";
+
+mapboxgl.workerClass = MapboxWorker;
+
+mapboxgl.accessToken =
+  "pk.eyJ1Ijoic2FudGl0aGVodW1hbiIsImEiOiJja2x4Z2c4NWgwaTJpMnNseWl3YmptaGo5In0.qF7SiRjy-aHf-W_OGcbApg";
+
+export default function Map({ props }) {
+  const { setMap, setLng, setLat, userCoord } = props;
+  const mapContainer = useRef();
+  const [zoom, setZoom] = useState(9);
+  const [activeLayer, setActiveLayer] = useState("tempLayer");
+
+  useEffect(() => {
+    if (userCoord) {
+      const map = new mapboxgl.Map({
+        container: mapContainer.current,
+        style: "mapbox://styles/santithehuman/cklzgm5d274ud17pnqg71odfu/draft",
+        center: userCoord,
+        zoom: zoom,
+      });
+      // Share map object accross app
+      setMap(map);
+
+      // Initialize the geolocate control.
+      var geolocate = new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true,
+        },
+        trackUserLocation: true,
+      });
+      // Add the control to the map.
+      map.addControl(geolocate);
+      map.on("load", function () {
+        // Display default layer on load
+        openLayer(map, activeLayer);
+      });
+      map.on("move", () => {
+        setLng(map.getCenter().lng.toFixed(4));
+        setLat(map.getCenter().lat.toFixed(4));
+        setZoom(map.getZoom().toFixed(2));
+      });
+      // Listen for click events
+      map.on("click", function (e) {
+        // The event object (e) contains information like the
+        // coordinates of the point on the map that was clicked.
+        createMarker(map, activeLayer, e.lngLat);
+      });
+
+      return () => map.remove();
+    }
+  }, [userCoord]);
+
+  return <div className="map-container" ref={mapContainer} />;
+}

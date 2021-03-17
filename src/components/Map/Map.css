@@ -1,0 +1,16 @@
+.map-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    }
+    
+.marker {
+    background-image: url('./assets/marker-2.png');
+    background-size: contain;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    cursor: pointer;
+    }

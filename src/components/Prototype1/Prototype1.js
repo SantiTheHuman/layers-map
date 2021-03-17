@@ -1,29 +1,31 @@
-import React, { useRef, useEffect, useState } from "react";
-import mapboxgl from "mapbox-gl";
-// eslint-disable-next-line import/no-webpack-loader-syntax
-import MapboxWorker from "worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker";
+import React, { useEffect, useState } from "react";
+import Map from "../Map/Map";
 import "./Prototype1.css";
 
-mapboxgl.workerClass = MapboxWorker;
-
-mapboxgl.accessToken =
-  "pk.eyJ1Ijoic2FudGl0aGVodW1hbiIsImEiOiJja2x4Z2c4NWgwaTJpMnNseWl3YmptaGo5In0.qF7SiRjy-aHf-W_OGcbApg";
-
 export default function Prototype1() {
-  const mapContainer = useRef();
-  const [lng, setLng] = useState(-70.9);
-  const [lat, setLat] = useState(42.35);
-  const [zoom, setZoom] = useState(9);
+  const [lng, setLng] = useState(null);
+  const [lat, setLat] = useState(null);
+  const [userCoord, setUserCoord] = useState(null);
+  const [map, setMap] = useState(null);
+
+  const success = async (pos) => {
+    var crd = await pos.coords;
+    setUserCoord([crd.longitude, crd.latitude]);
+  };
+
+  function error(err) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
+
+  var options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0,
+  };
 
   useEffect(() => {
-    const map = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: "mapbox://styles/santithehuman/cklzgm5d274ud17pnqg71odfu/draft",
-      center: [lng, lat],
-      zoom: zoom,
-    });
-    return () => map.remove();
+    navigator.geolocation.getCurrentPosition(success, error, options);
   }, []);
 
-  return <div className="map-container" ref={mapContainer} />;
+  return <Map props={{ setMap, setLng, setLat, userCoord }} />;
 }
