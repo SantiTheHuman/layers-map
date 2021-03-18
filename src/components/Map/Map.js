@@ -24,6 +24,7 @@ export default function Map({ props }) {
         style: "mapbox://styles/santithehuman/cklzgm5d274ud17pnqg71odfu/draft",
         center: userCoord,
         zoom: zoom,
+        attributionControl: false,
       });
       // Share map object accross app
       setMap(map);
@@ -36,7 +37,15 @@ export default function Map({ props }) {
         trackUserLocation: true,
       });
       // Add the control to the map.
-      map.addControl(geolocate);
+      map.addControl(geolocate, "bottom-right");
+      const nav = new mapboxgl.NavigationControl();
+      map.addControl(nav, "bottom-right");
+      map.addControl(
+        new mapboxgl.FullscreenControl({
+          container: document.querySelector("body"),
+        })
+      );
+      map.addControl(new mapboxgl.AttributionControl(), "bottom-left");
       map.on("load", function () {
         // Display default layer on load
         openLayer(map, activeLayer);
