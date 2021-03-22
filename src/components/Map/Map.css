@@ -46,7 +46,7 @@
 
     .mapboxgl-ctrl-bottom-left > .mapboxgl-ctrl:not(.mapboxgl-ctrl-attrib) {
         grid-area: top;
-        opacity: 0.3;
+        opacity: 0.5;
         display: flex !important;
         justify-content: flex-start;
         align-items: flex-end;
@@ -54,15 +54,15 @@
 
     .mapboxgl-ctrl-attrib {
         grid-area: bottom;
-        opacity: 0.5;
+        opacity: 1;
     } 
     .mapboxgl-ctrl-attrib.mapboxgl-compact {
         margin: 7px;
         margin-right: 0px;
-        opacity: 0.24;
+        opacity: 0.45;
     }
     .mapboxgl-ctrl-attrib.mapboxgl-compact.mapboxgl-compact-show {
-        opacity: 0.5;
+        opacity: 0.8;
 
     }
     
