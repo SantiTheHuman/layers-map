@@ -8,8 +8,7 @@ import "./Map.css";
 
 mapboxgl.workerClass = MapboxWorker;
 
-mapboxgl.accessToken =
-  process.env.REACT_APP_MAPBOX_TOKEN;
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
 export default function Map({ props }) {
   const { setMap, setLng, setLat, userCoord } = props;
