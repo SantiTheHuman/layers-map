@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Map from "../Map/Map";
+import UI from "../Layers/UI"
+
 import "./Prototype1.css";
 
 export default function Prototype1() {
@@ -27,5 +29,8 @@ export default function Prototype1() {
     navigator.geolocation.getCurrentPosition(success, error, options);
   }, []);
 
-  return <Map props={{ setMap, setLng, setLat, userCoord }} />;
+  return <div className="app-container">
+    <UI/>
+    <Map props={{ setMap, setLng, setLat, userCoord }} />
+  </div>;
 }

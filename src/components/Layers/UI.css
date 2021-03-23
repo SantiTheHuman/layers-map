@@ -1,0 +1,95 @@
+.UI {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.show-layers-button {
+  padding: 1rem 5rem;
+  border: none;
+  border-radius: 50px;
+  color: white;
+  background-color: black;
+  position: fixed;
+  bottom: 20px;
+  right: 5.5rem;
+  z-index: 2;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.show-layers-button:focus {
+  outline: none;
+}
+
+.LayersContainer {
+  height: 100vh;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+  overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  pointer-events: all;
+}
+.LayersContainer::-webkit-scrollbar {
+  display: none;
+}
+.hidden-container {
+  pointer-events: none;
+}
+
+.LayersList {
+  height: fit-content;
+  margin: 50vh 20px 100px 0px;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  pointer-events: auto;
+  overflow: hidden;
+  transition: 0.5s;
+}
+.hidden-list {
+  margin: 100vh 20px 100px 0px;
+  pointer-events: none;
+}
+
+.LayerThumbnail {
+  height: 300px;
+  padding: 20px;
+  border: 1px solid grey;
+  border-radius: 15px;
+  font-size: 1.2rem;
+  background-color: rgb(34, 34, 34);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.layer-headline {
+  padding: 10px;
+  border-radius: 15px;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+}
+
+.layer-headline span {
+  font-size: 5rem;
+}
+
+.layer-headline h3 {
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+
+.LayerOptions ul {
+  list-style: none;
+  position: absolute;
+}
