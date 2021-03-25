@@ -12,7 +12,7 @@ export default function openLayer(map, layerId) {
     new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).addTo(map);
   });
 
-  map.loadImage("../assets/marker-1.png", function (error, image) {
+  map.loadImage("../assets/marker-2.png", function (error, image) {
     if (error) throw error;
     map.addImage("custom-marker", image);
     // Add a symbol layer

@@ -14,7 +14,9 @@ export default function Map({ props }) {
   const { setMap, setLng, setLat, userCoord } = props;
   const mapContainer = useRef();
   const [zoom, setZoom] = useState(9);
-  const [activeLayer, setActiveLayer] = useState("tempLayer");
+  const [activeLayer, setActiveLayer] = useState(
+    "2b1f5094-90fc-4cee-b5ea-0943e369c7b1"
+  );
 
   useEffect(() => {
     if (userCoord) {
@@ -47,7 +49,7 @@ export default function Map({ props }) {
       map.addControl(new mapboxgl.AttributionControl(), "bottom-left");
       map.on("load", function () {
         // Display default layer on load
-        openLayer(map, activeLayer);
+        // openLayer(map, activeLayer);
       });
       map.on("move", () => {
         setLng(map.getCenter().lng.toFixed(4));

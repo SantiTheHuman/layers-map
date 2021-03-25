@@ -1,7 +1,7 @@
 import React from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { CREATE_LAYER } from "./layer-queries";
-import { updateCache } from "./helpers";
+import { updateCache } from "../../data/helpers";
 
 export default function AddLayer() {
   const [showForm, setShowForm] = React.useState(false);

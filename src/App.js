@@ -1,7 +1,7 @@
 import React from "react";
 import { ApolloProvider } from "@apollo/client";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { hasuraAPI } from "./data/apollo";
+import { hasuraAPI } from "./data/apollo-client";
 import Prototype1 from "./components/Prototype1/Prototype1";
 import "./App.css";
 
