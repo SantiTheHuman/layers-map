@@ -1,11 +1,11 @@
 import { gql } from "@apollo/client";
 
 export const LAYERS_QUERY = gql`
-  query MyQuery {
+  query allLayers {
     layers {
-      id
-      icon
+      layer_id
       name
+      icon
       public
     }
   }
