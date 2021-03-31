@@ -5,7 +5,7 @@ import AllMarkers from "./AllMarkers";
 import { ADD_MARKER, updateMarkersCache } from "../../data/marker-queries";
 import "./Map.css";
 
-export default function Map2({ userCoord }) {
+export default function Map({ userCoord }) {
   const [viewport, setViewport] = useState({
     latitude: userCoord[0],
     longitude: userCoord[1],
@@ -31,12 +31,12 @@ export default function Map2({ userCoord }) {
     });
   }, [userCoord]);
 
-
   return (
     <ReactMapGL
       {...viewport}
       onViewportChange={(nextViewport) => setViewport(nextViewport)}
-      onClick={(e) => !expandMarker &&
+      onClick={(e) =>
+        !expandMarker &&
         addMarker({
           variables: { layer_id: layer, title: null, point: e.lngLat },
         })
