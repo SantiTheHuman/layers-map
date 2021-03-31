@@ -1,8 +1,7 @@
-import React, { useMemo, useState } from "react";
+import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { Marker } from "react-map-gl";
 import { MARKERS_QUERY } from "../../data/marker-queries";
-import MarkerInput from "./MarkerInput";
 import MarkerHead from "./MarkerHead";
 import MarkerStandSVG from "./assets/MarkerStandSVG";
 

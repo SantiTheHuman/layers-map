@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
-import ReactMapGL from "react-map-gl";
 import AllMarkers from "./AllMarkers";
 import { ADD_MARKER, updateMarkersCache } from "../../data/marker-queries";
 import "./Map.css";
+import ReactMapGL from "react-map-gl";
+import mapboxgl from "mapbox-gl"; // This is a dependency of react-map-gl even if you didn't explicitly install it
+// eslint-disable-next-line import/no-webpack-loader-syntax
+mapboxgl.workerClass = require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
 
-export default function Map2({ userCoord }) {
+export default function Map({ userCoord }) {
   const [viewport, setViewport] = useState({
     latitude: userCoord[0],
     longitude: userCoord[1],
@@ -31,12 +34,12 @@ export default function Map2({ userCoord }) {
     });
   }, [userCoord]);
 
-
   return (
     <ReactMapGL
       {...viewport}
       onViewportChange={(nextViewport) => setViewport(nextViewport)}
-      onClick={(e) => !expandMarker &&
+      onClick={(e) =>
+        !expandMarker &&
         addMarker({
           variables: { layer_id: layer, title: null, point: e.lngLat },
         })
