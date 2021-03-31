@@ -38,13 +38,29 @@ export const ADD_MARKER = gql`
   }
 `;
 
+export const UPDATE_TITLE = gql`
+  mutation updateTitle($marker_id: uuid!, $title: String!) {
+    update_markers_by_pk(
+      pk_columns: { marker_id: $marker_id }
+      _set: { title: $title }
+    ) {
+      layer {
+        name
+      }
+      title
+      location
+      icon
+    }
+  }
+`;
+
 export const DELETE_MARKER = gql`
   mutation deleteMarker($marker_id: uuid!) {
-  delete_markers_by_pk(marker_id: $marker_id) {
-    marker_id
+    delete_markers_by_pk(marker_id: $marker_id) {
+      marker_id
+    }
   }
-}
-`
+`;
 
 export const updateMarkersCache = (cache, { data }) => {
   // Fetch the todos from the cache
@@ -62,7 +78,7 @@ export const updateMarkersCache = (cache, { data }) => {
       data: { markers: [newMarker, ...markersList.markers] },
     });
   } else {
-    cache.evict({ marker_id: data.marker_id })
+    cache.evict({ marker_id: data.marker_id });
     cache.gc();
   }
 };

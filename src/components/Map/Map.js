@@ -1,71 +1,52 @@
-import React, { useRef, useEffect, useState } from "react";
-import mapboxgl from "mapbox-gl";
-// eslint-disable-next-line import/no-webpack-loader-syntax
-import MapboxWorker from "worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker";
-import openLayer from "./helpers/openLayer";
-import createMarker from "../Marker/Marker";
+import React, { useEffect, useState } from "react";
+import { useMutation } from "@apollo/react-hooks";
+import ReactMapGL from "react-map-gl";
+import AllMarkers from "./AllMarkers";
+import { ADD_MARKER, updateMarkersCache } from "../../data/marker-queries";
 import "./Map.css";
 
-mapboxgl.workerClass = MapboxWorker;
-
-mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
-
-export default function Map({ props }) {
-  const { setMap, setLng, setLat, userCoord } = props;
-  const mapContainer = useRef();
-  const [zoom, setZoom] = useState(9);
-  const [activeLayer, setActiveLayer] = useState(
-    "2b1f5094-90fc-4cee-b5ea-0943e369c7b1"
-  );
+export default function Map2({ userCoord }) {
+  const [viewport, setViewport] = useState({
+    latitude: userCoord[0],
+    longitude: userCoord[1],
+    zoom: 14,
+    bearing: 0,
+    pitch: 0,
+  });
+  const [layer, setLayer] = useState("2b1f5094-90fc-4cee-b5ea-0943e369c7b1");
+  const [expandMarker, setExpandMarker] = useState(null);
+  const [addMarker, { loading }] = useMutation(ADD_MARKER, {
+    update: updateMarkersCache,
+    // onCompleted: () => {
+    // },
+  });
 
   useEffect(() => {
-    if (userCoord) {
-      const map = new mapboxgl.Map({
-        container: mapContainer.current,
-        style: "mapbox://styles/santithehuman/cklzgm5d274ud17pnqg71odfu/draft",
-        center: userCoord,
-        zoom: zoom,
-        attributionControl: false,
-      });
-      // Share map object accross app
-      setMap(map);
-
-      // Initialize the geolocate control.
-      var geolocate = new mapboxgl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true,
-        },
-        trackUserLocation: true,
-      });
-      // Add the control to the map.
-      map.addControl(geolocate, "bottom-right");
-      const nav = new mapboxgl.NavigationControl();
-      map.addControl(nav, "bottom-right");
-      map.addControl(
-        new mapboxgl.FullscreenControl({
-          container: document.querySelector("body"),
-        })
-      );
-      map.addControl(new mapboxgl.AttributionControl(), "bottom-left");
-      map.on("load", function () {
-        // Display default layer on load
-        // openLayer(map, activeLayer);
-      });
-      map.on("move", () => {
-        setLng(map.getCenter().lng.toFixed(4));
-        setLat(map.getCenter().lat.toFixed(4));
-        setZoom(map.getZoom().toFixed(2));
-      });
-      // Listen for click events
-      map.on("click", function (e) {
-        // The event object (e) contains information like the
-        // coordinates of the point on the map that was clicked.
-        createMarker(map, activeLayer, e.lngLat);
-      });
-
-      return () => map.remove();
-    }
+    setViewport({
+      latitude: userCoord[0],
+      longitude: userCoord[1],
+      zoom: 14,
+      bearing: 0,
+      pitch: 0,
+    });
   }, [userCoord]);
 
-  return <div className="map-container" ref={mapContainer} />;
+
+  return (
+    <ReactMapGL
+      {...viewport}
+      onViewportChange={(nextViewport) => setViewport(nextViewport)}
+      onClick={(e) => !expandMarker &&
+        addMarker({
+          variables: { layer_id: layer, title: null, point: e.lngLat },
+        })
+      }
+      width="100vw"
+      height="100vh"
+      mapStyle="mapbox://styles/santithehuman/cklzgm5d274ud17pnqg71odfu/draft"
+      mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+    >
+      <AllMarkers props={{ layer, expandMarker, setExpandMarker }} />
+    </ReactMapGL>
+  );
 }

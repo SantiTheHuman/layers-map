@@ -2,8 +2,7 @@ import React from "react";
 import { ApolloProvider } from "@apollo/client";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { graphClient } from "./data/apollo-client";
-import Prototype1 from "./components/Prototype1/Prototype1";
-import Prototype2 from "./components/Prototype2/Prototype2";
+import MapContainer from "./components/Map/MapContainer";
 import "./App.css";
 
 function App() {
@@ -18,11 +17,11 @@ function App() {
               <>
                 <h1>LAYERS</h1>
                 <h3>currently in development</h3>
-                <Link to="/Prototype">Prototype</Link>
+                <Link to="/Map">Prototype</Link>
               </>
             )}
           />
-          <Route exact path="/Prototype" render={() => <Prototype2 />} />
+          <Route exact path="/Map" render={() => <MapContainer />} />
         </div>
       </ApolloProvider>
     </Router>

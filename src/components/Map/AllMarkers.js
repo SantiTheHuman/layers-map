@@ -17,7 +17,7 @@ export default function AllMarkers({ props }) {
     data.markers.map((marker, index) => (
       <>
         <Marker
-          className={expandMarker === index && "active"}
+          className={expandMarker === index ? "active" : ""}
           key={index}
           longitude={marker.location.coordinates[0]}
           latitude={marker.location.coordinates[1]}
