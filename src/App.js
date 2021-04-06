@@ -16,8 +16,9 @@ function App() {
             render={() => (
               <>
                 <h1>LAYERS</h1>
-                <h3>currently in development</h3>
-                <Link to="/Map">Prototype</Link>
+                <h3>A Collaborative Map</h3>
+                <p>Currently in development.</p>
+                <Link to="/Map">Layers 0.01</Link>
               </>
             )}
           />
