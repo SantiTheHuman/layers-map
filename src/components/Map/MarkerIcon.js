@@ -1,17 +1,26 @@
 import React, { useState } from "react";
+import { useMutation } from "@apollo/react-hooks";
+import { UPDATE_ICON, updateMarkersCache } from "../../data/marker-queries";
 import EditSVG from "./assets/EditSVG";
-
 import SparkSVG from "./assets/SparkSVG";
 import HeartSVG from "./assets/HeartSVG";
 import WarningSVG from "./assets/WarningSVG";
 import Emoji from "./assets/Emoji";
 
-export default function MarkerIcon({ icon, editThis, setEditThis }) {
+export default function MarkerIcon({ icon, id, editThis, setEditThis }) {
   const [iconInput, setIconInput] = useState(icon);
+  const [updateIcon] = useMutation(UPDATE_ICON, {
+    variables: {
+      marker_id: id,
+      icon: iconInput,
+    },
+    update: updateMarkersCache,
+    onCompleted: () => setEditThis(null),
+  });
 
   let rightIcon;
 
-  switch (icon) {
+  switch (iconInput) {
     case "spark":
       rightIcon = <SparkSVG />;
       break;
@@ -36,16 +45,17 @@ export default function MarkerIcon({ icon, editThis, setEditThis }) {
     </>
   );
 
-  const updateIcon = (e) => {
+  const submitIcon = (e) => {
     e.preventDefault();
-    console.log(iconInput);
+    updateIcon();
   };
 
   const editIcon = (
     <form
-      onSubmit={(e) => updateIcon(e)}
-      onChange={() => {
-        console.log(iconInput);
+      onSubmit={(e) => submitIcon(e)}
+      onChange={(e) => {
+        e.preventDefault();
+        setIconInput(e.target.value);
       }}
     >
       Marker Icon:
@@ -55,7 +65,7 @@ export default function MarkerIcon({ icon, editThis, setEditThis }) {
         <option value="warning">Warning</option>
         <option value="emoji">Emoji</option>
       </select>
-      <button onClick={() => setEditThis("no")}>Cancel</button>
+      <button onClick={() => setEditThis(null)}>Cancel</button>
       <button type="submit">Save</button>
     </form>
   );

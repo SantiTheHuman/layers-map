@@ -27,9 +27,5 @@ export default function MapContainer() {
     getUserLocation();
   }, []);
 
-  return (
-    <div>
-      <Map userCoord={userCoord} />
-    </div>
-  );
+  return <Map userCoord={userCoord} />;
 }

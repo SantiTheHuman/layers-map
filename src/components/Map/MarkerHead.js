@@ -1,18 +1,23 @@
 import React from "react";
-import MarkerInput from "./MarkerInput";
+import MarkerContent from "./MarkerContent";
 import MarkerIcon from "./MarkerIcon";
 
 export default function MarkerHead({ props }) {
-  const { marker, index, expandMarker, setExpandMarker } = props;
+  const { marker, expandMarker, setExpandMarker } = props;
 
   return (
-    <div className="MarkerHead" onClick={() => setExpandMarker(index)}>
-      {expandMarker === index ? (
-        <MarkerInput marker={marker} setExpandMarker={setExpandMarker} />
+    <div
+      className="MarkerHead"
+      onClick={() => setExpandMarker(marker.marker_id)}
+    >
+      {expandMarker === marker.marker_id ? (
+        <MarkerContent marker={marker} setExpandMarker={setExpandMarker} />
       ) : (
-        <MarkerIcon icon={marker.icon} />
+        <>
+          <MarkerIcon icon={marker.icon} />
+          {marker.title && <span>...</span>}
+        </>
       )}
-      {marker.title && <span>...</span>}
     </div>
   );
 }

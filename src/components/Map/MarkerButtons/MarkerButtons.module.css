@@ -1,0 +1,4 @@
+.markerButtons {
+  display: flex;
+  flex-direction: row;
+}

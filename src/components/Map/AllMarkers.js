@@ -14,21 +14,17 @@ export default function AllMarkers({ props }) {
   const markers =
     data &&
     data.markers.map((marker, index) => (
-      <>
-        <Marker
-          className={expandMarker === index ? "active" : ""}
-          key={index}
-          longitude={marker.location.coordinates[0]}
-          latitude={marker.location.coordinates[1]}
-          offsetTop={-28}
-          offsetLeft={-20}
-        >
-          <MarkerHead
-            props={{ marker, index, expandMarker, setExpandMarker }}
-          />
-          <MarkerStandSVG />
-        </Marker>
-      </>
+      <Marker
+        className={expandMarker === marker.marker_id ? "active" : ""}
+        key={index}
+        longitude={marker.location.coordinates[0]}
+        latitude={marker.location.coordinates[1]}
+        offsetTop={-28}
+        offsetLeft={-20}
+      >
+        <MarkerHead props={{ marker, expandMarker, setExpandMarker }} />
+        <MarkerStandSVG />
+      </Marker>
     ));
 
   return <div>{markers}</div>;
