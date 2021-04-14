@@ -72,7 +72,7 @@ export const DELETE_MARKER = gql`
 
 export const updateMarkersCache = (cache, { data }) => {
   // Fetch the markers from the cache
-  const markersList = cache.readQuery({
+  const allMarkers = cache.readQuery({
     query: MARKERS_QUERY,
     variables: { layer_id: "2b1f5094-90fc-4cee-b5ea-0943e369c7b1" },
   });
@@ -84,7 +84,7 @@ export const updateMarkersCache = (cache, { data }) => {
     cache.writeQuery({
       query: MARKERS_QUERY,
       variables: { layer_id: "2b1f5094-90fc-4cee-b5ea-0943e369c7b1" },
-      data: { markers: [newMarker, ...markersList.markers] },
+      data: { markers: [newMarker, ...allMarkers.markers] },
     });
     console.log("hi");
   } else {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
-import AllMarkers from "./AllMarkers";
+import Markers from "../Markers/Markers";
 import { ADD_MARKER, updateMarkersCache } from "../../data/marker-queries";
 import "./Map.css";
 import ReactMapGL from "react-map-gl";
@@ -49,7 +49,7 @@ export default function Map({ userCoord }) {
       mapStyle="mapbox://styles/santithehuman/cklzgm5d274ud17pnqg71odfu/draft"
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
     >
-      <AllMarkers props={{ layer, expandMarker, setExpandMarker }} />
+      <Markers props={{ layer, expandMarker, setExpandMarker }} />
     </ReactMapGL>
   );
 }

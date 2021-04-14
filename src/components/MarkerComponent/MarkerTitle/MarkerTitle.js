@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
-import { UPDATE_TITLE, updateMarkersCache } from "../../data/marker-queries";
-import EditSVG from "./assets/EditSVG";
+import { UPDATE_TITLE, updateMarkersCache } from "../../../data/marker-queries";
+import EditSVG from "../assets/EditSVG";
 
 export default function MarkerName({ title, id, editThis, setEditThis }) {
   const [titleInput, setTitleInput] = useState(title);

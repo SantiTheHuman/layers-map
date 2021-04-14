@@ -18,7 +18,7 @@ function App() {
                 <h1>LAYERS</h1>
                 <h3>A Collaborative Map</h3>
                 <p>Currently in development.</p>
-                <Link to="/Map">Layers 0.01</Link>
+                <Link to="/Map">Layers 0.00001</Link>
               </>
             )}
           />

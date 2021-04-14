@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
-import { UPDATE_ICON, updateMarkersCache } from "../../data/marker-queries";
-import EditSVG from "./assets/EditSVG";
-import SparkSVG from "./assets/SparkSVG";
-import HeartSVG from "./assets/HeartSVG";
-import WarningSVG from "./assets/WarningSVG";
-import Emoji from "./assets/Emoji";
+import { UPDATE_ICON, updateMarkersCache } from "../../../data/marker-queries";
+import EditSVG from "../assets/EditSVG";
+import SparkSVG from "../assets/SparkSVG";
+import HeartSVG from "../assets/HeartSVG";
+import WarningSVG from "../assets/WarningSVG";
+import Emoji from "../assets/Emoji";
 
 export default function MarkerIcon({ icon, id, editThis, setEditThis }) {
   const [iconInput, setIconInput] = useState(icon);

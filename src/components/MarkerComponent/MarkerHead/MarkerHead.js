@@ -1,6 +1,6 @@
 import React from "react";
-import MarkerContent from "./MarkerContent";
-import MarkerIcon from "./MarkerIcon";
+import MarkerIcon from "../MarkerIcon/MarkerIcon";
+import MarkerPopUp from "../MarkerPopUp/MarkerPopUp";
 
 export default function MarkerHead({ props }) {
   const { marker, expandMarker, setExpandMarker } = props;
@@ -11,7 +11,7 @@ export default function MarkerHead({ props }) {
       onClick={() => setExpandMarker(marker.marker_id)}
     >
       {expandMarker === marker.marker_id ? (
-        <MarkerContent marker={marker} setExpandMarker={setExpandMarker} />
+        <MarkerPopUp marker={marker} setExpandMarker={setExpandMarker} />
       ) : (
         <>
           <MarkerIcon icon={marker.icon} />

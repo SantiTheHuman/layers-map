@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
-import { DELETE_MARKER, updateMarkersCache } from "../../data/marker-queries";
-import MarkerIcon from "./MarkerIcon";
-import MarkerTitle from "./MarkerTitle";
-import MarkerButtons from "./MarkerButtons/MarkerButtons";
-import { Marker } from "mapbox-gl";
+import {
+  DELETE_MARKER,
+  updateMarkersCache,
+} from "../../../data/marker-queries";
+import MarkerIcon from "../MarkerIcon/MarkerIcon";
+import MarkerTitle from "../MarkerTitle/MarkerTitle";
+import MarkerButtons from "../MarkerButtons/MarkerButtons";
 
-export default function MarkerContent({ marker, setExpandMarker }) {
+export default function MarkerPopUp({ marker, setExpandMarker }) {
   const [deleteMarker, { loading }] = useMutation(DELETE_MARKER, {
     update: updateMarkersCache,
     onCompleted: () => setExpandMarker(null),
@@ -21,14 +23,13 @@ export default function MarkerContent({ marker, setExpandMarker }) {
   };
 
   return (
-    <div className="MarkerContent">
+    <div className="MarkerPopUp">
       <MarkerIcon
         icon={marker.icon}
         id={marker.marker_id}
         editThis={editThis}
         setEditThis={setEditThis}
       />
-
       <MarkerTitle
         title={marker.title}
         id={marker.marker_id}
