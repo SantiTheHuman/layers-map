@@ -1,4 +1,20 @@
 .markerButtons {
+  border-radius: 15px;
   display: flex;
   flex-direction: row;
+}
+
+.markerButtons button {
+  margin: 2px 5px;
+  padding: 5px 20px;
+  color: #ffe3dd;
+  background-color: black;
+  border-style: none;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.markerButtons button:focus {
+  outline: none;
+  background-color: rgb(20, 20, 20);
 }

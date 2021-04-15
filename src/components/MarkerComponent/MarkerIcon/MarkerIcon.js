@@ -6,8 +6,16 @@ import SparkSVG from "../assets/SparkSVG";
 import HeartSVG from "../assets/HeartSVG";
 import WarningSVG from "../assets/WarningSVG";
 import Emoji from "../assets/Emoji";
+import classes from "./MarkerIcon.module.css";
 
-export default function MarkerIcon({ icon, id, editThis, setEditThis }) {
+export default function MarkerIcon({
+  icon,
+  id,
+  expanded,
+  setExpandMarker,
+  editThis,
+  setEditThis,
+}) {
   const [iconInput, setIconInput] = useState(icon);
   const [updateIcon] = useMutation(UPDATE_ICON, {
     variables: {
@@ -36,9 +44,12 @@ export default function MarkerIcon({ icon, id, editThis, setEditThis }) {
 
   let displayIcon = (
     <>
-      {rightIcon}{" "}
-      {editThis && editThis !== "icon" && (
-        <button className="edit-button" onClick={() => setEditThis("icon")}>
+      <button onClick={() => setExpandMarker(id)}>{rightIcon}</button>
+      {expanded && editThis !== "icon" && (
+        <button
+          className={classes.editButton}
+          onClick={() => setEditThis("icon")}
+        >
           <EditSVG />
         </button>
       )}
@@ -52,6 +63,7 @@ export default function MarkerIcon({ icon, id, editThis, setEditThis }) {
 
   const editIcon = (
     <form
+      className={classes.markerForm}
       onSubmit={(e) => submitIcon(e)}
       onChange={(e) => {
         e.preventDefault();
@@ -71,7 +83,7 @@ export default function MarkerIcon({ icon, id, editThis, setEditThis }) {
   );
 
   return (
-    <div className="marker-row">
+    <div className={`${classes.markerIcon} ${expanded && classes.expanded}`}>
       {displayIcon}
       {editThis && editThis === "icon" && editIcon}
     </div>

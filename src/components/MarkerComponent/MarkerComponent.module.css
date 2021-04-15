@@ -1,0 +1,68 @@
+.active {
+  z-index: 2;
+}
+
+.markerHead {
+  height: fit-content;
+  width: fit-content;
+  word-break: keep-all;
+  font-size: 1rem;
+  color: #ffe3dd;
+  position: absolute;
+  bottom: 33px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+.markerHead:focus {
+  outline: none;
+}
+
+.markerStand {
+  position: absolute;
+  bottom: 0;
+}
+
+.ellipsis {
+  color: #ffe3dd;
+  margin-block-start: -0.9rem;
+  margin-block-end: -0.2em;
+  font-size: 1.2rem;
+}
+
+.markerPopUp {
+  height: fit-content;
+  width: auto;
+  max-width: 95vw;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.markerRow {
+  margin: 2px;
+  padding: 5px 40px;
+  background-color: black;
+  border: 2px solid #ffe3dd;
+  border-radius: 15px;
+  white-space: nowrap;
+  position: relative;
+  /* bottom: 33px; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.editButton {
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  opacity: 0.5;
+  position: absolute;
+  right: 0;
+}

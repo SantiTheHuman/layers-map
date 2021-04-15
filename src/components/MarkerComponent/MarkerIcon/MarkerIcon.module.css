@@ -1,0 +1,32 @@
+.markerIcon {
+  width: fit-content;
+  padding: 5px;
+  background-color: black;
+  border: 2px solid #ffe3dd;
+  border-radius: 50px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+button {
+  background-color: transparent;
+  border-style: none;
+  cursor: pointer;
+}
+
+.editButton {
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  opacity: 0.5;
+  position: absolute;
+  right: 0;
+}
+
+.expanded {
+  padding: 3px 40px;
+}

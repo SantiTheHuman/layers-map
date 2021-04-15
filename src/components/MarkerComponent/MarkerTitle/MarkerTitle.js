@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { UPDATE_TITLE, updateMarkersCache } from "../../../data/marker-queries";
 import EditSVG from "../assets/EditSVG";
+import classes from "../MarkerComponent.module.css";
 
-export default function MarkerName({ title, id, editThis, setEditThis }) {
+export default function MarkerTitle({ title, id, editThis, setEditThis }) {
   const [titleInput, setTitleInput] = useState(title);
   const [updateTitle] = useMutation(UPDATE_TITLE, {
     variables: {
@@ -14,7 +15,7 @@ export default function MarkerName({ title, id, editThis, setEditThis }) {
     onCompleted: () => setEditThis(null),
   });
 
-  const displayName = title ? <h4>{title}</h4> : <span>Add Marker Name</span>;
+  const displayName = title ? <h4>{title}</h4> : <span>Add marker name?</span>;
 
   const nameForm = (
     <form
@@ -41,13 +42,16 @@ export default function MarkerName({ title, id, editThis, setEditThis }) {
   };
 
   return (
-    <div className="marker-row">
+    <div className={classes.markerRow}>
       {editThis === "title" ? (
         nameForm
       ) : (
         <>
           {displayName}
-          <button className="edit-button" onClick={() => setEditThis("title")}>
+          <button
+            className={classes.editButton}
+            onClick={() => setEditThis("title")}
+          >
             <EditSVG />
           </button>
         </>
