@@ -1,0 +1,17 @@
+{
+  "providers": [
+    "awscloudformation"
+  ],
+  "projectName": "Layers",
+  "version": "3.1",
+  "frontend": "javascript",
+  "javascript": {
+    "framework": "react",
+    "config": {
+      "SourceDir": "/Users/sania/Documents/GitHub/layers-map/src",
+      "DistributionDir": "/Users/sania/Documents/GitHub/layers-map/build",
+      "BuildCommand": "npm run build",
+      "StartCommand": "npm run start"
+    }
+  }
+}
