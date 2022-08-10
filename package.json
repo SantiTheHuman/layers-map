@@ -9,6 +9,7 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "aws-amplify": "^4.3.30",
     "graphql": "^16.2.0",
     "graphql-tag": "^2.12.6",
     "mapbox-gl": "^2.6.1",
