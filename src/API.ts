@@ -5,6 +5,7 @@
 export type CreateLayerInput = {
   id?: string | null,
   name?: string | null,
+  _version?: number | null,
 };
 
 export type ModelLayerConditionInput = {
@@ -58,54 +59,64 @@ export type Layer = {
   __typename: "Layer",
   id: string,
   name?: string | null,
-  team?: ModelSpotConnection | null,
+  spots?: ModelSpotConnection | null,
   createdAt: string,
   updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
 };
 
 export type ModelSpotConnection = {
   __typename: "ModelSpotConnection",
   items:  Array<Spot | null >,
   nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type Spot = {
   __typename: "Spot",
   id: string,
-  name: string,
+  layerID?: string | null,
+  name?: string | null,
   description?: string | null,
-  layer?: Layer | null,
+  layers?: Layer | null,
   createdAt: string,
   updatedAt: string,
-  layerTeamId?: string | null,
-  spotLayerId?: string | null,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+  layerSpotsId?: string | null,
 };
 
 export type UpdateLayerInput = {
   id: string,
   name?: string | null,
+  _version?: number | null,
 };
 
 export type DeleteLayerInput = {
   id: string,
+  _version?: number | null,
 };
 
 export type CreateSpotInput = {
   id?: string | null,
-  name: string,
+  layerID?: string | null,
+  name?: string | null,
   description?: string | null,
-  layerTeamId?: string | null,
-  spotLayerId?: string | null,
+  _version?: number | null,
+  layerSpotsId?: string | null,
 };
 
 export type ModelSpotConditionInput = {
+  layerID?: ModelIDInput | null,
   name?: ModelStringInput | null,
   description?: ModelStringInput | null,
   and?: Array< ModelSpotConditionInput | null > | null,
   or?: Array< ModelSpotConditionInput | null > | null,
   not?: ModelSpotConditionInput | null,
-  layerTeamId?: ModelIDInput | null,
-  spotLayerId?: ModelIDInput | null,
+  layerSpotsId?: ModelIDInput | null,
 };
 
 export type ModelIDInput = {
@@ -126,14 +137,16 @@ export type ModelIDInput = {
 
 export type UpdateSpotInput = {
   id: string,
+  layerID?: string | null,
   name?: string | null,
   description?: string | null,
-  layerTeamId?: string | null,
-  spotLayerId?: string | null,
+  _version?: number | null,
+  layerSpotsId?: string | null,
 };
 
 export type DeleteSpotInput = {
   id: string,
+  _version?: number | null,
 };
 
 export type ModelLayerFilterInput = {
@@ -148,62 +161,18 @@ export type ModelLayerConnection = {
   __typename: "ModelLayerConnection",
   items:  Array<Layer | null >,
   nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type ModelSpotFilterInput = {
   id?: ModelIDInput | null,
+  layerID?: ModelIDInput | null,
   name?: ModelStringInput | null,
   description?: ModelStringInput | null,
   and?: Array< ModelSpotFilterInput | null > | null,
   or?: Array< ModelSpotFilterInput | null > | null,
   not?: ModelSpotFilterInput | null,
-  layerTeamId?: ModelIDInput | null,
-  spotLayerId?: ModelIDInput | null,
-};
-
-export type ModelSubscriptionLayerFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionLayerFilterInput | null > | null,
-  or?: Array< ModelSubscriptionLayerFilterInput | null > | null,
-};
-
-export type ModelSubscriptionIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  in?: Array< string | null > | null,
-  notIn?: Array< string | null > | null,
-};
-
-export type ModelSubscriptionStringInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  in?: Array< string | null > | null,
-  notIn?: Array< string | null > | null,
-};
-
-export type ModelSubscriptionSpotFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  description?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionSpotFilterInput | null > | null,
-  or?: Array< ModelSubscriptionSpotFilterInput | null > | null,
+  layerSpotsId?: ModelIDInput | null,
 };
 
 export type CreateLayerMutationVariables = {
@@ -216,22 +185,29 @@ export type CreateLayerMutation = {
     __typename: "Layer",
     id: string,
     name?: string | null,
-    team?:  {
+    spots?:  {
       __typename: "ModelSpotConnection",
       items:  Array< {
         __typename: "Spot",
         id: string,
-        name: string,
+        layerID?: string | null,
+        name?: string | null,
         description?: string | null,
         createdAt: string,
         updatedAt: string,
-        layerTeamId?: string | null,
-        spotLayerId?: string | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        layerSpotsId?: string | null,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -245,22 +221,29 @@ export type UpdateLayerMutation = {
     __typename: "Layer",
     id: string,
     name?: string | null,
-    team?:  {
+    spots?:  {
       __typename: "ModelSpotConnection",
       items:  Array< {
         __typename: "Spot",
         id: string,
-        name: string,
+        layerID?: string | null,
+        name?: string | null,
         description?: string | null,
         createdAt: string,
         updatedAt: string,
-        layerTeamId?: string | null,
-        spotLayerId?: string | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        layerSpotsId?: string | null,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -274,22 +257,29 @@ export type DeleteLayerMutation = {
     __typename: "Layer",
     id: string,
     name?: string | null,
-    team?:  {
+    spots?:  {
       __typename: "ModelSpotConnection",
       items:  Array< {
         __typename: "Spot",
         id: string,
-        name: string,
+        layerID?: string | null,
+        name?: string | null,
         description?: string | null,
         createdAt: string,
         updatedAt: string,
-        layerTeamId?: string | null,
-        spotLayerId?: string | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        layerSpotsId?: string | null,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -302,23 +292,30 @@ export type CreateSpotMutation = {
   createSpot?:  {
     __typename: "Spot",
     id: string,
-    name: string,
+    layerID?: string | null,
+    name?: string | null,
     description?: string | null,
-    layer?:  {
+    layers?:  {
       __typename: "Layer",
       id: string,
       name?: string | null,
-      team?:  {
+      spots?:  {
         __typename: "ModelSpotConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     createdAt: string,
     updatedAt: string,
-    layerTeamId?: string | null,
-    spotLayerId?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    layerSpotsId?: string | null,
   } | null,
 };
 
@@ -331,23 +328,30 @@ export type UpdateSpotMutation = {
   updateSpot?:  {
     __typename: "Spot",
     id: string,
-    name: string,
+    layerID?: string | null,
+    name?: string | null,
     description?: string | null,
-    layer?:  {
+    layers?:  {
       __typename: "Layer",
       id: string,
       name?: string | null,
-      team?:  {
+      spots?:  {
         __typename: "ModelSpotConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     createdAt: string,
     updatedAt: string,
-    layerTeamId?: string | null,
-    spotLayerId?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    layerSpotsId?: string | null,
   } | null,
 };
 
@@ -360,23 +364,30 @@ export type DeleteSpotMutation = {
   deleteSpot?:  {
     __typename: "Spot",
     id: string,
-    name: string,
+    layerID?: string | null,
+    name?: string | null,
     description?: string | null,
-    layer?:  {
+    layers?:  {
       __typename: "Layer",
       id: string,
       name?: string | null,
-      team?:  {
+      spots?:  {
         __typename: "ModelSpotConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     createdAt: string,
     updatedAt: string,
-    layerTeamId?: string | null,
-    spotLayerId?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    layerSpotsId?: string | null,
   } | null,
 };
 
@@ -389,22 +400,29 @@ export type GetLayerQuery = {
     __typename: "Layer",
     id: string,
     name?: string | null,
-    team?:  {
+    spots?:  {
       __typename: "ModelSpotConnection",
       items:  Array< {
         __typename: "Spot",
         id: string,
-        name: string,
+        layerID?: string | null,
+        name?: string | null,
         description?: string | null,
         createdAt: string,
         updatedAt: string,
-        layerTeamId?: string | null,
-        spotLayerId?: string | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        layerSpotsId?: string | null,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -421,14 +439,49 @@ export type ListLayersQuery = {
       __typename: "Layer",
       id: string,
       name?: string | null,
-      team?:  {
+      spots?:  {
         __typename: "ModelSpotConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncLayersQueryVariables = {
+  filter?: ModelLayerFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncLayersQuery = {
+  syncLayers?:  {
+    __typename: "ModelLayerConnection",
+    items:  Array< {
+      __typename: "Layer",
+      id: string,
+      name?: string | null,
+      spots?:  {
+        __typename: "ModelSpotConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -440,23 +493,30 @@ export type GetSpotQuery = {
   getSpot?:  {
     __typename: "Spot",
     id: string,
-    name: string,
+    layerID?: string | null,
+    name?: string | null,
     description?: string | null,
-    layer?:  {
+    layers?:  {
       __typename: "Layer",
       id: string,
       name?: string | null,
-      team?:  {
+      spots?:  {
         __typename: "ModelSpotConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     createdAt: string,
     updatedAt: string,
-    layerTeamId?: string | null,
-    spotLayerId?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    layerSpotsId?: string | null,
   } | null,
 };
 
@@ -472,26 +532,67 @@ export type ListSpotsQuery = {
     items:  Array< {
       __typename: "Spot",
       id: string,
-      name: string,
+      layerID?: string | null,
+      name?: string | null,
       description?: string | null,
-      layer?:  {
+      layers?:  {
         __typename: "Layer",
         id: string,
         name?: string | null,
         createdAt: string,
         updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       createdAt: string,
       updatedAt: string,
-      layerTeamId?: string | null,
-      spotLayerId?: string | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      layerSpotsId?: string | null,
     } | null >,
     nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
-export type OnCreateLayerSubscriptionVariables = {
-  filter?: ModelSubscriptionLayerFilterInput | null,
+export type SyncSpotsQueryVariables = {
+  filter?: ModelSpotFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncSpotsQuery = {
+  syncSpots?:  {
+    __typename: "ModelSpotConnection",
+    items:  Array< {
+      __typename: "Spot",
+      id: string,
+      layerID?: string | null,
+      name?: string | null,
+      description?: string | null,
+      layers?:  {
+        __typename: "Layer",
+        id: string,
+        name?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      layerSpotsId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
 };
 
 export type OnCreateLayerSubscription = {
@@ -499,27 +600,30 @@ export type OnCreateLayerSubscription = {
     __typename: "Layer",
     id: string,
     name?: string | null,
-    team?:  {
+    spots?:  {
       __typename: "ModelSpotConnection",
       items:  Array< {
         __typename: "Spot",
         id: string,
-        name: string,
+        layerID?: string | null,
+        name?: string | null,
         description?: string | null,
         createdAt: string,
         updatedAt: string,
-        layerTeamId?: string | null,
-        spotLayerId?: string | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        layerSpotsId?: string | null,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
-};
-
-export type OnUpdateLayerSubscriptionVariables = {
-  filter?: ModelSubscriptionLayerFilterInput | null,
 };
 
 export type OnUpdateLayerSubscription = {
@@ -527,27 +631,30 @@ export type OnUpdateLayerSubscription = {
     __typename: "Layer",
     id: string,
     name?: string | null,
-    team?:  {
+    spots?:  {
       __typename: "ModelSpotConnection",
       items:  Array< {
         __typename: "Spot",
         id: string,
-        name: string,
+        layerID?: string | null,
+        name?: string | null,
         description?: string | null,
         createdAt: string,
         updatedAt: string,
-        layerTeamId?: string | null,
-        spotLayerId?: string | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        layerSpotsId?: string | null,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
-};
-
-export type OnDeleteLayerSubscriptionVariables = {
-  filter?: ModelSubscriptionLayerFilterInput | null,
 };
 
 export type OnDeleteLayerSubscription = {
@@ -555,105 +662,121 @@ export type OnDeleteLayerSubscription = {
     __typename: "Layer",
     id: string,
     name?: string | null,
-    team?:  {
+    spots?:  {
       __typename: "ModelSpotConnection",
       items:  Array< {
         __typename: "Spot",
         id: string,
-        name: string,
+        layerID?: string | null,
+        name?: string | null,
         description?: string | null,
         createdAt: string,
         updatedAt: string,
-        layerTeamId?: string | null,
-        spotLayerId?: string | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        layerSpotsId?: string | null,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
-};
-
-export type OnCreateSpotSubscriptionVariables = {
-  filter?: ModelSubscriptionSpotFilterInput | null,
 };
 
 export type OnCreateSpotSubscription = {
   onCreateSpot?:  {
     __typename: "Spot",
     id: string,
-    name: string,
+    layerID?: string | null,
+    name?: string | null,
     description?: string | null,
-    layer?:  {
+    layers?:  {
       __typename: "Layer",
       id: string,
       name?: string | null,
-      team?:  {
+      spots?:  {
         __typename: "ModelSpotConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     createdAt: string,
     updatedAt: string,
-    layerTeamId?: string | null,
-    spotLayerId?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    layerSpotsId?: string | null,
   } | null,
-};
-
-export type OnUpdateSpotSubscriptionVariables = {
-  filter?: ModelSubscriptionSpotFilterInput | null,
 };
 
 export type OnUpdateSpotSubscription = {
   onUpdateSpot?:  {
     __typename: "Spot",
     id: string,
-    name: string,
+    layerID?: string | null,
+    name?: string | null,
     description?: string | null,
-    layer?:  {
+    layers?:  {
       __typename: "Layer",
       id: string,
       name?: string | null,
-      team?:  {
+      spots?:  {
         __typename: "ModelSpotConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     createdAt: string,
     updatedAt: string,
-    layerTeamId?: string | null,
-    spotLayerId?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    layerSpotsId?: string | null,
   } | null,
-};
-
-export type OnDeleteSpotSubscriptionVariables = {
-  filter?: ModelSubscriptionSpotFilterInput | null,
 };
 
 export type OnDeleteSpotSubscription = {
   onDeleteSpot?:  {
     __typename: "Spot",
     id: string,
-    name: string,
+    layerID?: string | null,
+    name?: string | null,
     description?: string | null,
-    layer?:  {
+    layers?:  {
       __typename: "Layer",
       id: string,
       name?: string | null,
-      team?:  {
+      spots?:  {
         __typename: "ModelSpotConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     createdAt: string,
     updatedAt: string,
-    layerTeamId?: string | null,
-    spotLayerId?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    layerSpotsId?: string | null,
   } | null,
 };

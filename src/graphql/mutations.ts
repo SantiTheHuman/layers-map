@@ -10,20 +10,27 @@ export const createLayer = /* GraphQL */ `
     createLayer(input: $input, condition: $condition) {
       id
       name
-      team {
+      spots {
         items {
           id
+          layerID
           name
           description
           createdAt
           updatedAt
-          layerTeamId
-          spotLayerId
+          _version
+          _deleted
+          _lastChangedAt
+          layerSpotsId
         }
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -35,20 +42,27 @@ export const updateLayer = /* GraphQL */ `
     updateLayer(input: $input, condition: $condition) {
       id
       name
-      team {
+      spots {
         items {
           id
+          layerID
           name
           description
           createdAt
           updatedAt
-          layerTeamId
-          spotLayerId
+          _version
+          _deleted
+          _lastChangedAt
+          layerSpotsId
         }
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -60,20 +74,27 @@ export const deleteLayer = /* GraphQL */ `
     deleteLayer(input: $input, condition: $condition) {
       id
       name
-      team {
+      spots {
         items {
           id
+          layerID
           name
           description
           createdAt
           updatedAt
-          layerTeamId
-          spotLayerId
+          _version
+          _deleted
+          _lastChangedAt
+          layerSpotsId
         }
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -84,21 +105,28 @@ export const createSpot = /* GraphQL */ `
   ) {
     createSpot(input: $input, condition: $condition) {
       id
+      layerID
       name
       description
-      layer {
+      layers {
         id
         name
-        team {
+        spots {
           nextToken
+          startedAt
         }
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       createdAt
       updatedAt
-      layerTeamId
-      spotLayerId
+      _version
+      _deleted
+      _lastChangedAt
+      layerSpotsId
     }
   }
 `;
@@ -109,21 +137,28 @@ export const updateSpot = /* GraphQL */ `
   ) {
     updateSpot(input: $input, condition: $condition) {
       id
+      layerID
       name
       description
-      layer {
+      layers {
         id
         name
-        team {
+        spots {
           nextToken
+          startedAt
         }
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       createdAt
       updatedAt
-      layerTeamId
-      spotLayerId
+      _version
+      _deleted
+      _lastChangedAt
+      layerSpotsId
     }
   }
 `;
@@ -134,21 +169,28 @@ export const deleteSpot = /* GraphQL */ `
   ) {
     deleteSpot(input: $input, condition: $condition) {
       id
+      layerID
       name
       description
-      layer {
+      layers {
         id
         name
-        team {
+        spots {
           nextToken
+          startedAt
         }
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       createdAt
       updatedAt
-      layerTeamId
-      spotLayerId
+      _version
+      _deleted
+      _lastChangedAt
+      layerSpotsId
     }
   }
 `;

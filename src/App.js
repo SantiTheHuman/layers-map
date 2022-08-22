@@ -3,10 +3,10 @@ import { ApolloProvider } from "@apollo/client";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { graphClient } from "./data/apollo-client";
 import { Amplify, API, graphqlOperation } from "aws-amplify";
-import awsconfig from "./aws-exports";
+import awsconfig from "../Users/sania/Documents/GitHub/layers-map/src/aws-exports.js";
 import MapContainer from "./components/Map/MapContainer";
 import "./App.css";
-import DataTest from "./components/Test/data-test";
+import DataTest from "./components/Test/DataTest";
 
 Amplify.configure(awsconfig);
 

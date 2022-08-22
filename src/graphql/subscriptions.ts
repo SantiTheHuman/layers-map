@@ -3,134 +3,176 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateLayer = /* GraphQL */ `
-  subscription OnCreateLayer($filter: ModelSubscriptionLayerFilterInput) {
-    onCreateLayer(filter: $filter) {
+  subscription OnCreateLayer {
+    onCreateLayer {
       id
       name
-      team {
+      spots {
         items {
           id
+          layerID
           name
           description
           createdAt
           updatedAt
-          layerTeamId
-          spotLayerId
+          _version
+          _deleted
+          _lastChangedAt
+          layerSpotsId
         }
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
 export const onUpdateLayer = /* GraphQL */ `
-  subscription OnUpdateLayer($filter: ModelSubscriptionLayerFilterInput) {
-    onUpdateLayer(filter: $filter) {
+  subscription OnUpdateLayer {
+    onUpdateLayer {
       id
       name
-      team {
+      spots {
         items {
           id
+          layerID
           name
           description
           createdAt
           updatedAt
-          layerTeamId
-          spotLayerId
+          _version
+          _deleted
+          _lastChangedAt
+          layerSpotsId
         }
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
 export const onDeleteLayer = /* GraphQL */ `
-  subscription OnDeleteLayer($filter: ModelSubscriptionLayerFilterInput) {
-    onDeleteLayer(filter: $filter) {
+  subscription OnDeleteLayer {
+    onDeleteLayer {
       id
       name
-      team {
+      spots {
         items {
           id
+          layerID
           name
           description
           createdAt
           updatedAt
-          layerTeamId
-          spotLayerId
+          _version
+          _deleted
+          _lastChangedAt
+          layerSpotsId
         }
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
 export const onCreateSpot = /* GraphQL */ `
-  subscription OnCreateSpot($filter: ModelSubscriptionSpotFilterInput) {
-    onCreateSpot(filter: $filter) {
+  subscription OnCreateSpot {
+    onCreateSpot {
       id
+      layerID
       name
       description
-      layer {
+      layers {
         id
         name
-        team {
+        spots {
           nextToken
+          startedAt
         }
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       createdAt
       updatedAt
-      layerTeamId
-      spotLayerId
+      _version
+      _deleted
+      _lastChangedAt
+      layerSpotsId
     }
   }
 `;
 export const onUpdateSpot = /* GraphQL */ `
-  subscription OnUpdateSpot($filter: ModelSubscriptionSpotFilterInput) {
-    onUpdateSpot(filter: $filter) {
+  subscription OnUpdateSpot {
+    onUpdateSpot {
       id
+      layerID
       name
       description
-      layer {
+      layers {
         id
         name
-        team {
+        spots {
           nextToken
+          startedAt
         }
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       createdAt
       updatedAt
-      layerTeamId
-      spotLayerId
+      _version
+      _deleted
+      _lastChangedAt
+      layerSpotsId
     }
   }
 `;
 export const onDeleteSpot = /* GraphQL */ `
-  subscription OnDeleteSpot($filter: ModelSubscriptionSpotFilterInput) {
-    onDeleteSpot(filter: $filter) {
+  subscription OnDeleteSpot {
+    onDeleteSpot {
       id
+      layerID
       name
       description
-      layer {
+      layers {
         id
         name
-        team {
+        spots {
           nextToken
+          startedAt
         }
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       createdAt
       updatedAt
-      layerTeamId
-      spotLayerId
+      _version
+      _deleted
+      _lastChangedAt
+      layerSpotsId
     }
   }
 `;
