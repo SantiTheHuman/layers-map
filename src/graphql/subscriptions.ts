@@ -7,18 +7,20 @@ export const onCreateLayer = /* GraphQL */ `
     onCreateLayer {
       id
       name
+      url
+      description
+      icon
       spots {
         items {
           id
           layerID
           name
-          description
+          icon
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          layerSpotsId
         }
         nextToken
         startedAt
@@ -36,18 +38,20 @@ export const onUpdateLayer = /* GraphQL */ `
     onUpdateLayer {
       id
       name
+      url
+      description
+      icon
       spots {
         items {
           id
           layerID
           name
-          description
+          icon
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          layerSpotsId
         }
         nextToken
         startedAt
@@ -65,18 +69,20 @@ export const onDeleteLayer = /* GraphQL */ `
     onDeleteLayer {
       id
       name
+      url
+      description
+      icon
       spots {
         items {
           id
           layerID
           name
-          description
+          icon
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          layerSpotsId
         }
         nextToken
         startedAt
@@ -95,10 +101,13 @@ export const onCreateSpot = /* GraphQL */ `
       id
       layerID
       name
-      description
+      icon
       layers {
         id
         name
+        url
+        description
+        icon
         spots {
           nextToken
           startedAt
@@ -114,7 +123,6 @@ export const onCreateSpot = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      layerSpotsId
     }
   }
 `;
@@ -124,10 +132,13 @@ export const onUpdateSpot = /* GraphQL */ `
       id
       layerID
       name
-      description
+      icon
       layers {
         id
         name
+        url
+        description
+        icon
         spots {
           nextToken
           startedAt
@@ -143,7 +154,6 @@ export const onUpdateSpot = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      layerSpotsId
     }
   }
 `;
@@ -153,10 +163,13 @@ export const onDeleteSpot = /* GraphQL */ `
       id
       layerID
       name
-      description
+      icon
       layers {
         id
         name
+        url
+        description
+        icon
         spots {
           nextToken
           startedAt
@@ -172,7 +185,6 @@ export const onDeleteSpot = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      layerSpotsId
     }
   }
 `;

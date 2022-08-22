@@ -1,7 +1,7 @@
 #if( $ctx.source.deniedField )
   #return($util.toJson(null))
 #end
-#if( $util.isNull($ctx.source.layerSpotsId) )
+#if( $util.isNull($ctx.source.layerID) )
   #return
 #else
   #set( $GetRequest = {
@@ -14,7 +14,7 @@
       "#partitionKey": "id"
   },
   "expressionValues": {
-      ":partitionValue": $util.parseJson($util.dynamodb.toDynamoDBJson($util.defaultIfNullOrBlank($ctx.source.layerSpotsId, "___xamznone____")))
+      ":partitionValue": $util.parseJson($util.dynamodb.toDynamoDBJson($util.defaultIfNullOrBlank($ctx.source.layerID, "___xamznone____")))
   }
 }))
   #if( !$util.isNullOrEmpty($ctx.stash.authFilter) )

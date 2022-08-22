@@ -7,18 +7,20 @@ export const getLayer = /* GraphQL */ `
     getLayer(id: $id) {
       id
       name
+      url
+      description
+      icon
       spots {
         items {
           id
           layerID
           name
-          description
+          icon
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          layerSpotsId
         }
         nextToken
         startedAt
@@ -41,6 +43,9 @@ export const listLayers = /* GraphQL */ `
       items {
         id
         name
+        url
+        description
+        icon
         spots {
           nextToken
           startedAt
@@ -72,6 +77,9 @@ export const syncLayers = /* GraphQL */ `
       items {
         id
         name
+        url
+        description
+        icon
         spots {
           nextToken
           startedAt
@@ -93,10 +101,13 @@ export const getSpot = /* GraphQL */ `
       id
       layerID
       name
-      description
+      icon
       layers {
         id
         name
+        url
+        description
+        icon
         spots {
           nextToken
           startedAt
@@ -112,7 +123,6 @@ export const getSpot = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      layerSpotsId
     }
   }
 `;
@@ -127,10 +137,13 @@ export const listSpots = /* GraphQL */ `
         id
         layerID
         name
-        description
+        icon
         layers {
           id
           name
+          url
+          description
+          icon
           createdAt
           updatedAt
           _version
@@ -142,7 +155,6 @@ export const listSpots = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        layerSpotsId
       }
       nextToken
       startedAt
@@ -166,10 +178,13 @@ export const syncSpots = /* GraphQL */ `
         id
         layerID
         name
-        description
+        icon
         layers {
           id
           name
+          url
+          description
+          icon
           createdAt
           updatedAt
           _version
@@ -181,7 +196,6 @@ export const syncSpots = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        layerSpotsId
       }
       nextToken
       startedAt
