@@ -39,10 +39,6 @@ export default function LayersMenu() {
     allLayers();
   }, []);
 
-  useEffect(() => {
-    console.log(layersList);
-  }, [layersList]);
-
   if (!showLayers)
     return (
       <button
@@ -54,24 +50,22 @@ export default function LayersMenu() {
     );
 
   return (
-    <div className="layer-menu">
+    <div className="layers-menu">
       <button
         className="show-layers-button"
         onClick={() => setShowLayers(false)}
       >
         X Close
       </button>
-      <div>
-        {layersList.length > 0 &&
-          layersList.map(({ name, id, createdAt }) => {
-            return (
-              <>
-                <h4>{name}</h4>
-                <h4>{createdAt}</h4>
-              </>
-            );
-          })}
-      </div>
+      {layersList.length > 0 &&
+        layersList.map(({ name, id, createdAt }) => {
+          return (
+            <div className="layer-thumbnail">
+              <h4>{name}</h4>
+              <h4>{createdAt}</h4>
+            </div>
+          );
+        })}
     </div>
   );
 }
