@@ -6,6 +6,8 @@ import {
   deleteSpot,
 } from "../../graphql/mutations.ts";
 import { listSpots, listLayers } from "../../graphql/queries.ts";
+import LayersMenu from "../LayersMenu/LayersMenu";
+import { useLocation } from "react-router-dom";
 
 const addLayer = async () => {
   console.log(createLayer);
@@ -40,18 +42,40 @@ const allSpots = async () => {
 
 const allLayers = async () => {
   console.log(listLayers);
-  const result = await API.graphql(graphqlOperation(listLayers));
+  const result = await API.graphql(
+    graphqlOperation(`query ListLayers(
+    $filter: ModelLayerFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listLayers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+      }
+      nextToken
+      startedAt
+    }
+  }`)
+  );
   console.log(result);
 };
 
 export default function DataTest() {
+  let location = useLocation();
+
+  React.useEffect(() => {
+    console.log("TEST location", location);
+  }, [location]);
+
   return (
     <div>
-      <h1>Data test</h1>
+      <h1>{location.pathname}</h1>
       <button onClick={() => addLayer()}>Create layer</button>
       <button onClick={() => allLayers()}>List layers</button>
       <button onClick={() => addSpot()}>Create spot</button>
       <button onClick={() => allSpots()}>List spots</button>
+      <LayersMenu />
     </div>
   );
 }

@@ -1,12 +1,11 @@
-.UI {
-  height: 100vh;
+.layer-menu {
+  height: 50vh;
   width: 100vw;
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
   z-index: 1;
-  pointer-events: none;
-  overflow: hidden;
+  background-color: rgba(128, 128, 128, 0.621);
 }
 
 .show-layers-button {

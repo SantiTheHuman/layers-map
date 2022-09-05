@@ -29,7 +29,7 @@ function App() {
             }
           />
           <Route exact path="/Map" element={<MapContainer />} />
-          <Route exact path="/data-test" element={<DataTest />} />
+          <Route path="/*" element={<DataTest />} />
         </Routes>
       </BrowserRouter>
     </ApolloProvider>
